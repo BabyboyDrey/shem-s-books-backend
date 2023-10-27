@@ -354,7 +354,6 @@ router.get(
       })
       res.status(200).json('User logged out')
       console.log('User logging out')
-      
     } catch (err) {
       res.status(500).json(err.response)
     }
@@ -391,4 +390,16 @@ router.delete(
     }
   })
 )
+
+router.get('/getUsers', async (req, res) => {
+  try {
+    const foundUsers = await User.find().maxTimeMS(50000)
+    if (!foundUsers) {
+      res.status(404).json('No user found')
+    }
+    res.status(200).json(foundUsers)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+})
 module.exports = router
