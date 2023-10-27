@@ -36,7 +36,7 @@ if (process.env.NODE_ENV !== 'PRODUCTION') {
 }
 
 process.on('uncaughtException', err => {
-  console.log(`Error: ${err.messgae}`)
+  console.log(`Error: ${err.message}`)
   console.log('shutting down the server for handling uncaught exception')
 })
 

@@ -154,7 +154,7 @@ router.get(
           }
         }
       ])
-        .option({ maxTimeMS: 5000 })
+        .option({ maxTimeMS: 50000 })
         .exec()
 
       res.status(200).json(categoryBooks)
