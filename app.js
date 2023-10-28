@@ -12,16 +12,10 @@ const paymentReceiptsRoute = require('./controllers/paymentReceipt')
 const app = express()
 
 app.use(
-  cors([
-    {
-      origin: 'http://localhost:3000',
-      credentials: true
-    },
-    {
-      origin: 'https://shems-books-kvky.onrender.com',
-      credentials: true
-    }
-  ])
+  cors({
+    origin: ['http://localhost:5000', 'https://shems-books-kvky.onrender.com'],
+    withCredentials: true
+  })
 )
 app.use(cookieParser())
 app.use(express.json())
