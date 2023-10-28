@@ -93,7 +93,9 @@ router.post(
     try {
       const userEmail = req.body.email
 
-      const foundUser = await User.findOne({ email: userEmail })
+      const foundUser = await User.findOne({ email: userEmail }).maxTimeMS(
+        50000
+      )
 
       if (foundUser) {
         const validated = await bcrypt.compare(
