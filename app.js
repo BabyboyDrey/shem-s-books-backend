@@ -13,7 +13,7 @@ const app = express()
 
 app.use(
   cors({
-    origin: ['http://localhost:5000', 'https://shems-books-kvky.onrender.com'],
+    origin: ['http://localhost:3000', 'https://shems-books-kvky.onrender.com'],
     withCredentials: true
   })
 )
@@ -26,6 +26,7 @@ app.use('/api/event', eventRoute)
 app.use('/api/order', orderRoute)
 app.use('/api/receipt', paymentReceiptsRoute)
 app.use('/', express.static('uploads'))
+app.use(express.static(path.join(__dirname, 'build')))
 
 connectDb()
 
@@ -51,6 +52,10 @@ process.on('unhandledRejection', err => {
 
 app.get('/', (req, res) => {
   res.send(`Server ${process.env.PORT} running!`)
+})
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'))
 })
 
 const server = app.listen(process.env.PORT, (req, res) => {
