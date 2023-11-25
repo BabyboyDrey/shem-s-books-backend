@@ -7,6 +7,23 @@ const catchAsyncErrors = require('../middlewares/catchAsyncErrors')
 const fs = require('fs')
 
 router.post(
+  '/avi',
+  upload.array(
+    'images',
+    catchAsyncErrors(async (req, res) => {
+      try {
+        const file = req.files.map(file => {
+          return file
+        })
+        res.status(200).json(file)
+      } catch (err) {
+        res.status(500).json(err)
+      }
+    })
+  )
+)
+
+router.post(
   '/create-event',
   isSellerAuth,
   upload.array('images'),
